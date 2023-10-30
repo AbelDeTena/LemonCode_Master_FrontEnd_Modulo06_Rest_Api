@@ -24,9 +24,9 @@ export const CharacterCard: React.FunctionComponent<Props> = (props) => {
   return (
     <Card>
       <CardHeader
-        avatar={<Avatar aria-label="character">{character.status}</Avatar>}
+        avatar={<Avatar aria-label="character">{character.id}</Avatar>}
         title={character.name}
-        subheader={character.species}
+        subheader={character.location}
       />
       <CardContent>
         <div className={classes.content}>
@@ -35,9 +35,18 @@ export const CharacterCard: React.FunctionComponent<Props> = (props) => {
             title={character.name}
             style={{ height: 0, paddingTop: '56.25%' }}
           />
-          <Typography variant="subtitle1" gutterBottom>
-            {character.gender}
-          </Typography>
+
+          <div className={classes.Container}>
+            <div className={`${classes.Item} ${classes[character.gender]}`}>
+              <span>{character.gender}</span>
+            </div>
+            <div className={`${classes.Item}`}>
+              <span>{character.species}</span>
+            </div>
+            <div className={`${classes.Item} ${classes[character.status]}`}>
+              <span>{character.status}</span>
+            </div>
+          </div>
         </div>
       </CardContent>
       <CardActions>

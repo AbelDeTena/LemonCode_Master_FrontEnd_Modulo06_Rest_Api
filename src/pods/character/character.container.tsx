@@ -2,19 +2,20 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as api from './api';
 import { createEmptyCharacter, Character } from './character.vm';
-import { mapCharacterFromApiToVm, mapCharacterFromVmToApi } from './character.mappers';
+import { mapCharacterFromApiToVm, mapCharacterFromVmToApi, mapLocationApiToLookup } from './character.mappers';
 import { Lookup } from 'common/models';
 import { CharacterComponent } from './character.component';
+import { mapToCollection } from '../../common/mappers';
 
 export const CharacterContainer: React.FunctionComponent = (props) => {
   const [character, setCharacter] = React.useState<Character>(createEmptyCharacter());
-  const [cities, setCities] = React.useState<Lookup[]>([]);
+  const [locations, setLocations] = React.useState<Lookup[]>([]);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const handleLoadCityCollection = async () => {
-    const apiCities = await api.getCities();
-    setCities(apiCities);
+  const handleLoadLocationsCollection = async () => {
+    const apiLocations = await api.getLocations();
+    setLocations(mapToCollection(apiLocations, mapLocationApiToLookup));
   };
 
   const handleLoadCharacter = async () => {
@@ -26,7 +27,7 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
     if (id) {
       handleLoadCharacter();
     }
-    handleLoadCityCollection();
+    handleLoadLocationsCollection();
   }, []);
 
   const handleSave = async (character: Character) => {
@@ -39,5 +40,5 @@ export const CharacterContainer: React.FunctionComponent = (props) => {
     }
   };
 
-  return <CharacterComponent character={character} cities={cities} onSave={handleSave} />;
+  return <CharacterComponent character={character} locations={locations} onSave={handleSave} />;
 };
