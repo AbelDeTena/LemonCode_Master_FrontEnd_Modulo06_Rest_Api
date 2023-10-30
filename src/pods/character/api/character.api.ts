@@ -1,30 +1,27 @@
 import { Character, LocationApi } from './character.api-model';
-import { Lookup } from 'common/models';
-import { mockLocations, mockCharacterCollection } from './character.mock-data';
 
-const BASE_URL = 'https://rickandmortyapi.com/api';
+// const BASE_URL = 'https://rickandmortyapi.com/api';
+const BASE_URL = '/api';
 
 export const getCharacter = async (id: string): Promise<Character | null> => {
   let characterApi: Character | null = null;
-  try {
-    let characterEndpoint = `${BASE_URL}/character/${id}`;
-    const response = await fetch(characterEndpoint);
+  try {    
+    const response = await fetch(`${BASE_URL}/character/${id}`);
 
     if (response.ok) {
       characterApi = await response.json();
     }
 
     return characterApi;
-  } catch (ex) {
-    console.log(ex);
+  } catch (er) {
+    console.log(er);
   }
 };
 
 export const getLocations = async (): Promise<LocationApi[]> => {
   let locationsApi: LocationApi[] = [];
-  try {
-    let locationEndpoint = `${BASE_URL}/location`;
-    const response = await fetch(locationEndpoint);
+  try {    
+    const response = await fetch(`${BASE_URL}/location`);
 
     if (response.ok) {
       const responseJson = await response.json();
@@ -32,8 +29,8 @@ export const getLocations = async (): Promise<LocationApi[]> => {
     }
 
     return locationsApi;
-  } catch (ex) {
-    console.log(ex);
+  } catch (er) {
+    console.log(er);
   }
 };
 

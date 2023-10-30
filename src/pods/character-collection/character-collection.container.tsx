@@ -9,7 +9,7 @@ export const CharacterCollectionContainer = () => {
   const { characterCollection,  loadCharacterCollection } = useCharacterCollection();
   const navigate = useNavigate();
 
-  React.useEffect(() => {
+  React.useEffect(() => {    
     loadCharacterCollection();
   }, []);
 
