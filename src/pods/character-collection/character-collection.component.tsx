@@ -1,14 +1,14 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import { CharacterEntityVm } from './character-collection.vm';
-import { CharacterCard } from './components/hotel-card.component';
+import { CharacterCard } from './components/character-card.component';
 import * as classes from './character-collection.styles';
 
 interface Props {
   characterCollection: CharacterEntityVm [];
   onCreateCharacter: () => void;
-  onEdit: (id: string) => void;
-  onDelete: (id: string) => void;
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
 }
 
 export const CharacterCollectionComponent: React.FunctionComponent<Props> = (
