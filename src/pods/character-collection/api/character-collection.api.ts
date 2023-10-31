@@ -1,19 +1,41 @@
-import axios from 'axios';
 import { CharacterEntityApi } from './character-collection.api-model';
 import { mockCharacterCollection } from './character-collection.mock-data';
+import { gql } from 'graphql-request';
+import { graphQLClient } from '../../../core/api';
 
 let characterCollection = [...mockCharacterCollection];
-const BASE_URL = process.env.BASE_URL;
 
-export const getCharacterCollection = async (): Promise<CharacterEntityApi[]> => {
-  try {
-    const response = await axios.get(`${BASE_URL}/character`);
-    console.log(process.env.BASE_URL)
-    return response.data.results;
-  } catch (error) {
-    console.error('Error fetching character collection:', error);
-    throw error;
-  }
+interface CharacterCollectionResponse {
+  characters: {
+    results: CharacterEntityApi[];
+  };
+}
+
+export const getCharacterCollection = async (): Promise<
+  CharacterEntityApi[]
+> => {
+  const query = gql`
+    query {
+      characters {
+        results {
+          id
+          name
+          status
+          species
+          gender
+          image
+          location {
+            name
+          }
+        }
+      }
+    }
+  `;
+
+  const { characters } =
+    await graphQLClient.request<CharacterCollectionResponse>(query);
+
+  return characters.results;
 };
 
 export const deleteCharacter = async (id: number): Promise<boolean> => {
