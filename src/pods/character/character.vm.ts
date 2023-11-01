@@ -21,6 +21,7 @@ export interface Character {
   created: string;
   origin: Origin;
   location: Location;
+  bestSentences: string[];
 }
 
 export const createEmptyCharacter = (): Character => ({
@@ -36,4 +37,5 @@ export const createEmptyCharacter = (): Character => ({
   created: '',
   origin: { name: '', url: '' },
   location: { name: '', url: '' },
+  bestSentences: [""],
 });

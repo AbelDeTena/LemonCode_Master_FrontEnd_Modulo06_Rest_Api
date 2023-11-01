@@ -48,6 +48,10 @@ export const CharacterCard: React.FunctionComponent<Props> = (props) => {
             </div>
           </div>
         </div>
+        <div> 
+          <Typography variant='h5'>Best sentences</Typography>
+        {character.bestSentences.map((sentence) => <p key={sentence}>{sentence}</p>)}
+        </div>
       </CardContent>
       <CardActions>
         <IconButton onClick={() => onEdit(character.id)}>

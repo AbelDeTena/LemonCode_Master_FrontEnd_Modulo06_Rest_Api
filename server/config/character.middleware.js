@@ -1,8 +1,7 @@
-const hotelMiddleware = (req, res, next) => {
+const characterMiddleware = (req, res, next) => {
   if (req.method === 'POST') {
     req.body = {
-      ...req.body,
-      thumbNailUrl: '/thumbnails/new-hotel.jpg',
+      ...req.body,      
     };
   }
   next();
@@ -10,7 +9,7 @@ const hotelMiddleware = (req, res, next) => {
 
 module.exports = (req, res, next) => {
   if (req.path === '/characters') {
-    hotelMiddleware(req, res, next);
+    characterMiddleware(req, res, next);
   } else {
     next();
   }

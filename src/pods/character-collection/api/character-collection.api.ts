@@ -1,18 +1,17 @@
 import { CharacterEntityApi } from './character-collection.api-model';
 
-// const BASE_URL = 'https://rickandmortyapi.com/api';
 const BASE_URL = '/api';
 
 export const getCharacterCollection = async (): Promise<CharacterEntityApi[]> => {
   try {
-    const response = await fetch(`${BASE_URL}/character`);
+    const response = await fetch(`${BASE_URL}/characters`);
     
     if (!response.ok) {
       throw new Error(`Error fetching character collection: ${response.status}`);
     }
 
-    const data = await response.json();
-    return data.results;
+    const data = await response.json();    
+    return data;
   } catch (error) {
     console.error('Error fetching character collection:', error);
     throw error;
