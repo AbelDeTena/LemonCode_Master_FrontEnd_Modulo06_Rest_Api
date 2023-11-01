@@ -5,17 +5,15 @@ import { deleteCharacter } from './api';
 import { useCharacterCollection } from './character-collection.hook';
 import { CharacterCollectionComponent } from './character-collection.component';
 
-export const CharacterCollectionContainer = () => {
-  const [page, setPage] = React.useState(1);
-  const [filter, setFilter] = React.useState('');
-
+export const CharacterCollectionContainer = () => {  
+  const [variables, setVariables] = React.useState({ page: 1, filter: '' });
   const { characterCollection, loadCharacterCollection } =
-    useCharacterCollection({ page: page, filter: filter });
+    useCharacterCollection(variables);
   const navigate = useNavigate();
 
   React.useEffect(() => {
     loadCharacterCollection();
-  }, [page, filter]);
+  }, [variables]);
 
   const handleCreateCharacter = () => {
     navigate(linkRoutes.createCharacter);
@@ -32,30 +30,44 @@ export const CharacterCollectionContainer = () => {
 
   const handlePagination = {
     handleFirstPage: () => {
-      setPage(1);
+      setVariables((prevVariables) => ({
+        ...prevVariables,
+        page: 1,
+      }));
     },
-
+  
     handlePreviousPage: () => {
-      if (page > 1) {
-        const newPage = page - 1;
-        setPage(newPage);
+      if (variables.page > 1) {
+        setVariables((prevVariables) => ({
+          ...prevVariables,
+          page: prevVariables.page - 1,
+        }));
       }
     },
-
+  
     handleNextPage: () => {
-      if (page < 42) {
-        const newPage = page + 1;
-        setPage(newPage);
+      if (variables.page < 42) {
+        setVariables((prevVariables) => ({
+          ...prevVariables,
+          page: prevVariables.page + 1,
+        }));
       }
     },
-
+  
     handleLastPage: () => {
-      setPage(42);
+      setVariables((prevVariables) => ({
+        ...prevVariables,
+        page: 42,
+      }));
     },
   };
+  
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilter(e.target.value);
+    setVariables((prevVariables) => ({
+      ...prevVariables,
+      filter: e.target.value,
+    }));
   };
 
   return (
