@@ -6,6 +6,10 @@ export const root = css`
     margin-top: 2rem;
   }
 `;
+export const menu = css`
+  display: flex;
+  justify-content: center;
+`;
 
 export const list = css`
   display: grid;

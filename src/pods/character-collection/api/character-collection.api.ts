@@ -11,29 +11,37 @@ interface CharacterCollectionResponse {
   };
 }
 
-export const getCharacterCollection = async (): Promise<
+export interface CharacterCollectionVariables {
+  page: number;
+  filter: string;
+}
+
+export const getCharacterCollection = async ({page, filter}: CharacterCollectionVariables): Promise<
   CharacterEntityApi[]
 > => {
   const query = gql`
-    query {
-      characters {
-        results {
-          id
+  query ($page: Int!, $filter: String!) { 
+    characters(page: $page, filter: { name: $filter }) {
+      info {
+        count
+      }
+      results {
+        id
+        name
+        status
+        species
+        gender
+        image
+        location {
           name
-          status
-          species
-          gender
-          image
-          location {
-            name
-          }
         }
       }
     }
-  `;
+  }
+`;
 
   const { characters } =
-    await graphQLClient.request<CharacterCollectionResponse>(query);
+    await graphQLClient.request<CharacterCollectionResponse>(query, {page, filter});
 
   return characters.results;
 };

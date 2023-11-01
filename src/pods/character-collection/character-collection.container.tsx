@@ -6,12 +6,14 @@ import { useCharacterCollection } from './character-collection.hook';
 import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer = () => {
-  const { characterCollection,  loadCharacterCollection } = useCharacterCollection();
+  const [page, setPage] = React.useState(1);
+  const { characterCollection, loadCharacterCollection } =
+    useCharacterCollection({ page: page, filter: '' });
   const navigate = useNavigate();
 
   React.useEffect(() => {
     loadCharacterCollection();
-  }, []);
+  }, [page]);
 
   const handleCreateCharacter = () => {
     navigate(linkRoutes.createCharacter);
@@ -26,12 +28,38 @@ export const CharacterCollectionContainer = () => {
     loadCharacterCollection();
   };
 
+  const handlePagination = {
+    handleFirstPage: () => {
+      setPage(1);
+    },
+  
+    handlePreviousPage: () => {
+      if (page > 1) {
+        const newPage = page - 1;
+        setPage(newPage);
+      }
+    },
+  
+    handleNextPage: () => {
+      if (page < 42) {
+        const newPage = page + 1;
+        setPage(newPage);
+      }
+    },
+  
+    handleLastPage: () => {
+      setPage(42);
+    }
+  };
+  
+
   return (
     <CharacterCollectionComponent
       characterCollection={characterCollection}
       onCreateCharacter={handleCreateCharacter}
       onEdit={handleEdit}
       onDelete={handleDelete}
+      onPaginate={handlePagination}
     />
   );
 };
