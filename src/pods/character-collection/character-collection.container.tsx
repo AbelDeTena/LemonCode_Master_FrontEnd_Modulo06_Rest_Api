@@ -7,7 +7,7 @@ import { useCharacterCollection } from './character-collection.hook';
 import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer = () => {  
-  const [variables, setVariables] = React.useState({ page: 1, filter: '' });
+  const [variables, setVariables] = React.useState({ page: 1, filter: '' });  
   const [debouncedFilter] = useDebounce(variables.filter, 1000);
   const { characterCollection, loadCharacterCollection } =
     useCharacterCollection(variables);
@@ -15,7 +15,7 @@ export const CharacterCollectionContainer = () => {
 
   React.useEffect(() => {
     loadCharacterCollection();
-  }, [debouncedFilter]);
+  }, [variables.page, debouncedFilter]);
 
   const handleCreateCharacter = () => {
     navigate(linkRoutes.createCharacter);
