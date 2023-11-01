@@ -31,7 +31,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0",
-    "regenerator-runtime": "^0.14.0"
+    "regenerator-runtime": "^0.14.0",
+    "use-debounce": "^9.0.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.15",

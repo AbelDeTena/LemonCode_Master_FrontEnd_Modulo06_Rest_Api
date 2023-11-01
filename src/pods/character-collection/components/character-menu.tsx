@@ -15,7 +15,7 @@ interface Props {
     handleNextPage: () => void;
     handleLastPage: () => void;
   };
-  onSearch: (e: React.ChangeEvent<HTMLInputElement>)=>void
+  onSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const CharacterMenu: React.FunctionComponent<Props> = (props) => {
@@ -23,10 +23,16 @@ export const CharacterMenu: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div>
-      <div className={classes.menu}>
-        <Button variant="contained" color="primary" onClick={onCreateCharacter}>
-          Add Character
-        </Button>
+      <Button variant="contained" color="primary" onClick={onCreateCharacter}>
+        Add Character
+      </Button>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '15px',
+        }}
+      >
         <Button
           variant="contained"
           color="primary"
@@ -60,8 +66,17 @@ export const CharacterMenu: React.FunctionComponent<Props> = (props) => {
           Last
         </Button>
       </div>
-      <div>
-        <TextField label="Nombre" variant="outlined" fullWidth onChange={onSearch} />
+      <div
+        style={{
+          marginTop: '15px',          
+        }}
+      >
+        <TextField
+          label="name"
+          variant="outlined"
+          fullWidth
+          onChange={onSearch}
+        />
       </div>
     </div>
   );
