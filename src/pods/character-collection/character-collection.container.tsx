@@ -7,13 +7,15 @@ import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer = () => {
   const [page, setPage] = React.useState(1);
+  const [filter, setFilter] = React.useState('');
+
   const { characterCollection, loadCharacterCollection } =
-    useCharacterCollection({ page: page, filter: '' });
+    useCharacterCollection({ page: page, filter: filter });
   const navigate = useNavigate();
 
   React.useEffect(() => {
     loadCharacterCollection();
-  }, [page]);
+  }, [page, filter]);
 
   const handleCreateCharacter = () => {
     navigate(linkRoutes.createCharacter);
@@ -32,26 +34,29 @@ export const CharacterCollectionContainer = () => {
     handleFirstPage: () => {
       setPage(1);
     },
-  
+
     handlePreviousPage: () => {
       if (page > 1) {
         const newPage = page - 1;
         setPage(newPage);
       }
     },
-  
+
     handleNextPage: () => {
       if (page < 42) {
         const newPage = page + 1;
         setPage(newPage);
       }
     },
-  
+
     handleLastPage: () => {
       setPage(42);
-    }
+    },
   };
-  
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.target.value);
+  };
 
   return (
     <CharacterCollectionComponent
@@ -60,6 +65,7 @@ export const CharacterCollectionContainer = () => {
       onEdit={handleEdit}
       onDelete={handleDelete}
       onPaginate={handlePagination}
+      onSearch={handleSearch}
     />
   );
 };

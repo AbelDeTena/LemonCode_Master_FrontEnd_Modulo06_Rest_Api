@@ -15,6 +15,7 @@ interface Props {
     handleNextPage: () => void;
     handleLastPage: () => void;
   };
+  onSearch: (e: React.ChangeEvent<HTMLInputElement>)=>void
 }
 
 export const CharacterCollectionComponent: React.FunctionComponent<Props> = (
@@ -26,6 +27,7 @@ export const CharacterCollectionComponent: React.FunctionComponent<Props> = (
     onEdit,
     onDelete,
     onPaginate,
+    onSearch
   } = props;
 
   return (
@@ -33,6 +35,7 @@ export const CharacterCollectionComponent: React.FunctionComponent<Props> = (
       <CharacterMenu
         onCreateCharacter={onCreateCharacter}
         onPaginate={onPaginate}
+        onSearch={onSearch}
       />
 
       <ul className={classes.list}>
