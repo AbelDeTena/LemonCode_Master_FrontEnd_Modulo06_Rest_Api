@@ -762,7 +762,8 @@
       "created": "2017-11-04T18:48:46.250Z",
       "bestSentences": [
         "Hola soy Rick"
-      ]
+      ],
+      "locations": "Earth (C-137)"
     },
     {
       "id": 2,
@@ -836,7 +837,8 @@
       "url": "https://rickandmortyapi.com/api/character/2",
       "created": "2017-11-04T18:50:21.651Z",
       "bestSentences": [
-        "eeeee", "hola"
+        "asdf",
+        "hola"
       ]
     },
     {
@@ -901,7 +903,9 @@
       ],
       "url": "https://rickandmortyapi.com/api/character/3",
       "created": "2017-11-04T19:09:56.428Z",
-      "bestSentences": ["prueba"]
+      "bestSentences": [
+        "prueba"
+      ]
     },
     {
       "id": 4,
@@ -965,7 +969,34 @@
       ],
       "url": "https://rickandmortyapi.com/api/character/4",
       "created": "2017-11-04T19:22:43.665Z",
-      "bestSentences": ["Hola soy la prueba"]
+      "bestSentences": [
+        "Hola soy la prueba"
+      ]
+    },
+    {
+      "id": -1,
+      "name": "ABEL DE TENA",
+      "status": "Alive",
+      "species": "Human",
+      "type": "",
+      "gender": "Male",
+      "image": "",
+      "episode": [],
+      "url": "",
+      "created": "",
+      "origin": {
+        "name": "",
+        "url": ""
+      },
+      "location": {
+        "name": "",
+        "url": ""
+      },
+      "bestSentences": [
+        "probando",
+        "Hola de nuevo"
+      ],
+      "locations": "Earth (C-137)"
     }
   ]
 }
